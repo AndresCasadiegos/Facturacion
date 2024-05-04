@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/appro/Documents/NetBeansProjects/FacturacionElectrodomesticos/src/Modelo/Cliente.java</file>
+            <file>file:/C:/Users/appro/Documents/NetBeansProjects/FacturacionElectrodomesticos/src/Modelo/ClienteDao.java</file>
+            <file>file:/C:/Users/appro/Documents/NetBeansProjects/FacturacionElectrodomesticos/src/Vista/Sistema.java</file>
+            <file>file:/C:/Users/appro/Documents/NetBeansProjects/FacturacionElectrodomesticos/src/Modelo/conexion.java</file>
+            <file>file:/C:/Users/appro/Documents/NetBeansProjects/FacturacionElectrodomesticos/src/Modelo/loginDAO.java</file>
             <file>file:/C:/Users/appro/Documents/NetBeansProjects/FacturacionElectrodomesticos/src/Vista/Login.java</file>
+            <file>file:/C:/Users/appro/Documents/NetBeansProjects/FacturacionElectrodomesticos/src/Modelo/login.java</file>
         </group>
     </open-files>
 </project-private>
