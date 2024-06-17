@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2024 a las 06:30:45
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 11-06-2024 a las 22:48:14
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
-  `dni` int(11) NOT NULL,
+  `dni` int(11) DEFAULT NULL,
   `nombre` varchar(150) NOT NULL,
   `telefono` int(15) NOT NULL,
   `direccion` varchar(200) NOT NULL,
@@ -42,7 +42,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `dni`, `nombre`, `telefono`, `direccion`, `razon`, `fecha`) VALUES
-(3, 1004926948, 'elkin', 12345678, 'colombia', '', '2024-05-03 17:44:44');
+(1, 1004926948, 'andres', 12345678, 'colombia', '', '2024-05-01 13:35:06'),
+(3, 88031, 'sergio ', 31685378, 'colombia', '', '2024-05-17 08:03:29');
 
 -- --------------------------------------------------------
 
@@ -52,12 +53,19 @@ INSERT INTO `clientes` (`id`, `dni`, `nombre`, `telefono`, `direccion`, `razon`,
 
 CREATE TABLE `config` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(200) NOT NULL,
   `ruc` varchar(20) NOT NULL,
+  `nombre` varchar(200) NOT NULL,
   `telefono` int(15) NOT NULL,
   `direccion` varchar(200) NOT NULL,
   `razon` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `config`
+--
+
+INSERT INTO `config` (`id`, `ruc`, `nombre`, `telefono`, `direccion`, `razon`) VALUES
+(1, '12345678', 'LAS PALMAS', 12345678, 'Los Patios', 'Las Palmas');
 
 -- --------------------------------------------------------
 
@@ -78,23 +86,17 @@ CREATE TABLE `detalle` (
 --
 
 INSERT INTO `detalle` (`id`, `cod_pro`, `cantidad`, `precio`, `id_venta`) VALUES
-(5, 2580, 20, 5000.00, 27),
-(6, 2581, 10, 4000.00, 27),
-(7, 2580, 20, 5000.00, 28),
-(8, 2581, 10, 4000.00, 28),
-(9, 2580, 20, 5000.00, 29),
-(10, 2581, 10, 4000.00, 29),
-(11, 2580, 20, 5000.00, 30),
-(12, 2581, 10, 4000.00, 30),
-(13, 2580, 1, 5000.00, 31),
-(14, 2581, 1, 4000.00, 31),
-(15, 2580, 1, 5000.00, 32),
-(16, 2581, 1, 4000.00, 32),
-(17, 2580, 1, 5000.00, 33),
-(18, 2581, 1, 4000.00, 33),
-(19, 2580, 1, 5000.00, 34),
-(20, 2581, 1, 4000.00, 34),
-(21, 2580, 1, 5000.00, 35);
+(1, 2580, 5, 5000.00, 12),
+(2, 2581, 5, 7000.00, 12),
+(3, 2580, 1, 5000.00, 13),
+(4, 2581, 1, 7000.00, 13),
+(5, 2580, 1, 5000.00, 28),
+(6, 2580, 1, 5000.00, 29),
+(7, 2580, 1, 5000.00, 30),
+(8, 2581, 1, 7000.00, 30),
+(9, 2580, 2, 5000.00, 31),
+(10, 2581, 2, 7000.00, 31),
+(11, 2581, 1, 7000.00, 32);
 
 -- --------------------------------------------------------
 
@@ -117,9 +119,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo`, `nombre`, `proveedor`, `stock`, `precio`, `fecha`) VALUES
-(1, '2580', 'laptop hp', 'las palmas', 5, 5000.00, '2024-06-01 20:12:15'),
-(2, '2581', 'iphone', 'las palmas', 6, 4000.00, '2024-06-01 21:55:07'),
-(3, '2582', 'samsung', 'las palmas', 25, 6000.00, '2024-06-01 21:55:55');
+(2, '2580', 'laptop hp', 'editado', 5, 5000.00, '2024-05-30 21:53:05'),
+(3, '2581', 'iphone', 'editado', 10, 7000.00, '2024-06-01 17:15:35');
 
 -- --------------------------------------------------------
 
@@ -142,7 +143,7 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`id`, `ruc`, `nombre`, `telefono`, `direccion`, `razon`, `fecha`) VALUES
-(1, 1435, 'las palmas', 312412, 'colombia', 'hsahdh', '2024-06-01 20:11:26');
+(2, 2580, 'editado', 4532352, 'editado', 'safafaf', '2024-05-30 18:05:04');
 
 -- --------------------------------------------------------
 
@@ -154,15 +155,18 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `correo` varchar(100) NOT NULL,
-  `pass` varchar(100) NOT NULL
+  `pass` varchar(100) NOT NULL,
+  `rol` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `pass`) VALUES
-(1, 'andres', 'andres@gmail.com', '123');
+INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `pass`, `rol`) VALUES
+(1, 'andres', 'andres@gmail.com', '123', 'Administrador'),
+(2, 'elkin', 'elkin@gmail.com', '1234', 'Asistente'),
+(3, 'prueba', 'prueba@gmail.com', '123', 'Asistente');
 
 -- --------------------------------------------------------
 
@@ -183,8 +187,9 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `cliente`, `vendedor`, `total`, `fecha`) VALUES
-(34, '', 'Las Palmas', 9000.00, '01/06/2024'),
-(35, '', 'Las Palmas', 5000.00, '01/06/2024');
+(30, '', 'Las Palmas', 12000.00, '06/06/2024'),
+(31, '', 'Las Palmas', 24000.00, '06/06/2024'),
+(32, 'andres', 'andres', 7000.00, '07/06/2024');
 
 --
 -- Índices para tablas volcadas
@@ -246,13 +251,13 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `config`
 --
 ALTER TABLE `config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle`
 --
 ALTER TABLE `detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -264,19 +269,19 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
